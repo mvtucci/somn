@@ -646,7 +646,7 @@ input, select, textarea {
 
 		.image:before {
 			pointer-events: none;
-			background-image: url("../../images/overlay.png");
+			background-image: url("../images/overlay.png");
 			background-color: rgba(19, 21, 25, 0.5);
 			border-radius: 4px;
 			content: '';
@@ -1136,10 +1136,10 @@ input, select, textarea {
 			-ms-transition: background-color 2.5s ease-in-out;
 			transition: background-color 2.5s ease-in-out;
 			-moz-transition-delay: 0.75s;
-			-webkit-transition-delay: 0.75s;
+			-webkit-transition-delay: 4.75s;
 			-ms-transition-delay: 0.75s;
 			transition-delay: 0.75s;
-			background-image: linear-gradient(to top, rgba(19, 21, 25, 0.5), rgba(19, 21, 25, 0.5)), url("../../images/overlay.png");
+			background-image: linear-gradient(to top, rgba(19, 21, 25, 0.5), rgba(19, 21, 25, 0.5)), url("../images/overlay.png");
 			background-size: auto,
  256px 256px;
 			background-position: center,
@@ -1158,7 +1158,7 @@ input, select, textarea {
 			-webkit-transition: -webkit-transform 0.325s ease-in-out, -webkit-filter 0.325s ease-in-out;
 			-ms-transition: -ms-transform 0.325s ease-in-out, -ms-filter 0.325s ease-in-out;
 			transition: transform 0.325s ease-in-out, filter 0.325s ease-in-out;
-			background-image: url("../../images/bg.jpg");
+			background-image: url("../images/bg.jpg");
 			background-position: center;
 			background-size: cover;
 			background-repeat: no-repeat;
@@ -1311,10 +1311,10 @@ input, select, textarea {
 		}
 
 			#header .content .inner {
-				-moz-transition: max-height 3s ease, padding 3s ease, opacity 3s ease-in-out;
-    			-webkit-transition: max-height 3s ease, padding 3s ease, opacity 3s ease-in-out;
-    			-ms-transition: max-height 3s ease, padding 3s ease, opacity 3s ease-in-out;
-    			transition: max-height 3s ease, padding 3s ease, opacity 3s ease-in-out;
+				-moz-transition: max-height 0.75s ease, padding 0.75s ease, opacity 0.325s ease-in-out;
+				-webkit-transition: max-height 0.75s ease, padding 0.75s ease, opacity 0.325s ease-in-out;
+				-ms-transition: max-height 0.75s ease, padding 0.75s ease, opacity 0.325s ease-in-out;
+				transition: max-height 0.75s ease, padding 0.75s ease, opacity 0.325s ease-in-out;
 				-moz-transition-delay: 0.25s;
 				-webkit-transition-delay: 0.25s;
 				-ms-transition-delay: 0.25s;
@@ -1659,3 +1659,43 @@ input, select, textarea {
 		body.is-preload #footer {
 			opacity: 0;
 		}
+
+/* Device Mockups */
+.device-mockups {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1em auto 2em;
+}
+
+.device-mockup {
+    max-width: 200px;
+    opacity: 0;
+    animation: fadeIn 1s ease-in forwards;
+}
+
+.device-mockup:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.device-mockup:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+.device-mockup img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+/* Add the fadeIn animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
