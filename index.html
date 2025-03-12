@@ -1,124 +1,290 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Somn</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="assets/css/main.css" />
-    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap">
+    <style>
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #050015; /* Near black navy dark purple */
+            color: white;
+        }
+        .font-display {
+            font-family: 'Clash Display', sans-serif;
+        }
+        .font-body {
+            font-family: 'Inter', sans-serif;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        .delay-200 {
+            animation-delay: 200ms;
+        }
+        
+        .delay-400 {
+            animation-delay: 400ms;
+        }
+
+        .glass-nav {
+            backdrop-filter: blur(8px);
+            background-color: rgba(17, 24, 39, 0.4);
+        }
+    </style>
 </head>
-<body class="is-preload">
-<audio id="background-music" autoplay loop><source src="assets/audio/calm.mp3" type="audio/mp3"></audio>
+<body class="bg-gray-900 text-white">
+    <!-- Fixed Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 glass-nav">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex items-center justify-between h-16">
+                <a href="#" class="text-xl font-light tracking-tight">Somn</a>
+                
+                <div class="hidden md:flex space-x-8">
+                    <a href="#why-sleep" class="text-gray-300 hover:text-white transition-colors duration-200">Sleep</a>
+                    <a href="#why-somn" class="text-gray-300 hover:text-white transition-colors duration-200">Features</a>
+                    <a href="#contact" class="text-gray-300 hover:text-white transition-colors duration-200">Contact</a>
+                    <a href="#" class="text-gray-300 hover:text-white transition-colors duration-200">Sleep Quiz</a>
+                </div>
 
-    <!-- Wrapper -->
-    <div id="wrapper">
-
-        <!-- Header -->
-        <header id="header">
-            <div class="logo">
-                <span class="icon fa-moon"></span>
+                <!-- Mobile menu button -->
+                <button class="md:hidden text-gray-300 hover:text-white">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
             </div>
-            <div class="content">
-                <div class="inner">
-                    <h1>Somn</h1>
-                    <!-- Benefit Pictures -->
-                    <div class="device-mockups">
-                        <div class="device-mockup">
-                            <img src="assets/images/sleeping-woman.png" alt="Sleeping Woman" />
-                        </div>
-                        <div class="device-mockup">
-                            <img src="assets/images/device-mockup.png" alt="Somn Device Mockup" />
-                        </div>
-                        <div class="device-mockup">
-                            <img src="assets/images/couple-waking.png" alt="Couple Waking Up" />
-                        </div>
-                    </div>
-                    <p>Are you ready to take control of your nights and wake up refreshed?
-                        We're exploring new ways to help you sleep better, deeper, and smarter.</p>
-                        <p><b>Take our Sleep Score Quiz</b> and get personalized insights to improve your rest.</p>
-                    <!-- New Button -->
-                    <div style="text-align: center; margin-top: 1em;">
-                        <a href="#" class="button primary">Get Your Sleep Score</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Video -->
+    <section class="relative h-[85vh]">
+        <!-- Video Container -->
+        <div class="absolute inset-0 overflow-hidden">
+            <video 
+                autoplay 
+                loop 
+                muted 
+                playsinline 
+                class="w-full h-full object-cover brightness-50"
+            >
+                <source src="assets2/video/somn_vid.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        
+        <div class="relative h-full z-10 flex items-center justify-center">
+            <div class="max-w-4xl mx-auto px-6 text-center">
+                <h1 class="text-5xl md:text-7xl font-light tracking-tight mb-6 fade-in-up">
+                    Master Your Sleep
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-300 font-light mb-12 max-w-2xl mx-auto fade-in-up delay-200">
+                    Transform your nights. Elevate your days.
+                </p>
+                <a 
+                    href="#quiz" 
+                    class="inline-block text-lg px-12 py-4 bg-indigo-400/20 hover:bg-indigo-400/30 rounded-lg transition-all duration-300 fade-in-up delay-400"
+                >
+                    Start Your Journey
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pre-launch Section -->
+    <section class="py-32 px-6 bg-[#c5d4f0]">
+        <div class="max-w-6xl mx-auto">
+            <h3 class="text-5xl md:text-7xl font-light tracking-tight text-[#2b4c7e] mb-16">
+                Early Access Sleep Assessment
+            </h3>
+            
+            <div class="grid md:grid-cols-12 gap-20">
+                <!-- Left Column -->
+                <div class="md:col-span-7">
+                    <p class="text-xl text-[#3a5f8f] font-light leading-relaxed mb-8">
+                        Take our comprehensive sleep assessment and receive personalized guidance from sleep experts. Our approach focuses on understanding your unique patterns, providing expert consultation, and developing a custom sleep plan tailored to your needs.
+                    </p>
+                    
+                    <!-- Highlighted Offer -->
+                    <div class="mb-8">
+                        <h4 class="text-2xl text-[#2b4c7e] font-medium mb-2">
+                            15 members will receive free coaching
+                        </h4>
+                        <p class="text-xl text-[#3a5f8f] font-light leading-relaxed">
+                            Be among our first 15 members to receive a free one-on-one chat consultation with a live sleep coach.
+                        </p>
                     </div>
                 </div>
+
+                <!-- Right Column -->
+                <div class="md:col-span-5 flex items-start justify-start">
+                    <a href="/sleep-score" 
+                       class="inline-block text-lg px-8 py-4 border-2 border-[#2b4c7e] text-[#2b4c7e] rounded-full hover:bg-[#2b4c7e] hover:text-[#c5d4f0] transition-all duration-300">
+                        Take the Sleep Quiz
+                    </a>
+                </div>
             </div>
-            <nav>
-                <ul>
-                    <li><a href="#intro">Somn</a></li>
-                    <li><a href="#sleep">Sleep</a></li>
-                    <li><a href="#team">Team</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </header>
-
-        <!-- Main -->
-        <div id="main">
-
-            <!-- Intro -->
-            <article id="intro">
-                <h2 class="major">About Somn</h2>
-                <span class="image main"><img src="assets/images/pic01.jpg" alt="" /></span>
-                <p>Aenean ornare velit lacus, ac varius enim ullamcorper eu. Proin aliquam facilisis ante interdum congue. Integer mollis, nisl amet convallis, porttitor magna ullamcorper, amet egestas mauris. Ut magna finibus nisi nec lacinia. Nam maximus erat id euismod egestas. By the way, check out my <a href="#work">awesome work</a>.</p>
-            </article>
-
-            <!-- Work -->
-            <article id="sleep">
-                <h2 class="major">Why Sleep?</h2>
-                <span class="image main"><img src="assets/images/pic02.jpg" alt="" /></span>
-                <p>Adipiscing magna sed dolor elit. Praesent eleifend dignissim arcu, at eleifend sapien imperdiet ac. Aliquam erat volutpat. Praesent urna nisi, fringila lorem et vehicula lacinia quam. Integer sollicitudin mauris nec lorem luctus ultrices.</p>
-            </article>
-
-            <!-- About -->
-            <article id="team">
-                <h2 class="major">About Us</h2>
-                <span class="image main"><img src="assets/images/pic03.jpg" alt="" /></span>
-                <p>Lorem ipsum dolor sit amet, consectetur et adipiscing elit. Praesent eleifend dignissim arcu, at eleifend sapien imperdiet ac. Aliquam erat volutpat. Praesent urna nisi, fringila lorem et vehicula lacinia quam. Integer sollicitudin mauris nec lorem luctus ultrices. Aliquam libero et malesuada fames ac ante ipsum primis in faucibus. Cras viverra ligula sit amet ex mollis mattis lorem ipsum dolor sit amet.</p>
-            </article>
-
-            <!-- Contact -->
-            <article id="contact">
-                <h2 class="major">Contact</h2>
-                <form method="post" action="#">
-                    <div class="fields">
-                        <div class="field half">
-                            <label for="name">Name</label>
-                            <input type="text" name="name" id="name" />
-                        </div>
-                        <div class="field half">
-                            <label for="email">Email</label>
-                            <input type="email" name="email" id="email" />
-                        </div>
-                        <div class="field">
-                            <label for="message">Message</label>
-                            <textarea name="message" id="message" rows="4"></textarea>
-                        </div>
-                    </div>
-                    <ul class="actions">
-                        <li><input type="submit" value="Send Message" class="primary" /></li>
-                        <li><input type="reset" value="Reset" /></li>
-                    </ul>
-                </form>
-            </article>
-
         </div>
+    </section>
 
-        <!-- Footer -->
-        <footer id="footer">
-            <p class="copyright">&copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
-        </footer>
-    </div>
 
-    <!-- BG -->
-    <div id="bg"></div>
+    <!-- Why Sleep Section -->
+    <section id="why-sleep" class="py-32 px-6 bg-[#0f172a]">
+        <div class="max-w-6xl mx-auto">
+            <!-- Header -->
+            <h2 class="text-5xl md:text-7xl font-light text-white text-center mb-8">
+                Why Sleep?
+            </h2>
+            
+            <p class="text-xl text-gray-300 text-center max-w-4xl mx-auto mb-24 font-light leading-relaxed">
+                Sleep is the foundation of human performance. It's not just about rest—it's about becoming a Sleep Master, optimizing the third of your life that determines how well you live the other two-thirds.
+            </p>
 
-    <!-- Scripts -->
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/browser.min.js"></script>
-    <script src="assets/js/breakpoints.min.js"></script>
-    <script src="assets/js/util.js"></script>
-    <script src="assets/js/main.js"></script>
+            <!-- Three Columns -->
+            <div class="grid md:grid-cols-3 gap-16">
+                <!-- Physical Vitality -->
+                <div class="space-y-4">
+                    <h3 class="text-2xl font-light text-[#93c5fd] mb-4">Physical Vitality</h3>
+                    <p class="text-gray-300 leading-relaxed font-light">
+                        Sleep is your body's ultimate restoration period, enhancing immune function, athletic performance, and cellular repair. It's not just recovery—it's enhancement.
+                    </p>
+                </div>
 
+                <!-- Mental Clarity -->
+                <div class="space-y-4">
+                    <h3 class="text-2xl font-light text-[#c4b5fd] mb-4">Mental Clarity</h3>
+                    <p class="text-gray-300 leading-relaxed font-light">
+                        Quality sleep is crucial for memory consolidation, emotional regulation, and cognitive performance. It's your brain's superpower activation period.
+                    </p>
+                </div>
+
+                <!-- Lifetime Optimization -->
+                <div class="space-y-4">
+                    <h3 class="text-2xl font-light text-[#93c5fd] mb-4">Lifetime Optimization</h3>
+                    <p class="text-gray-300 leading-relaxed font-light">
+                        By mastering your sleep, you're not just improving your nights—you're upgrading your entire life. Every great day starts with the night before.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+    <!-- Why Somn Section -->
+    <section id="why-somn" class="py-32 px-6 bg-[#c5d4f0]">
+        <div class="max-w-6xl mx-auto">
+            <!-- Added Title -->
+            <h2 class="text-5xl md:text-7xl font-light text-[#2b4c7e] text-center mb-16">
+                Why Somn?
+            </h2>
+
+            <div class="grid md:grid-cols-3 gap-20">
+                <!-- Understand Your Sleep -->
+                <div>
+                    <h3 class="text-3xl font-light text-[#2b4c7e] mb-4">Understand Your Sleep</h3>
+                    <p class="text-xl text-[#3a5f8f] leading-relaxed font-light">
+                        We guide you through the process of understanding your sleep patterns and how you can improve. Our comprehensive analysis helps identify your unique sleep profile and areas for optimization.
+                    </p>
+                </div>
+
+                <!-- Set Goals -->
+                <div>
+                    <h3 class="text-3xl font-light text-[#2b4c7e] mb-4">Set Goals</h3>
+                    <p class="text-xl text-[#3a5f8f] leading-relaxed font-light">
+                        We work with you to set goals that are realistic, achievable and aligned with your lifestyle. Your sleep journey is unique, and your goals should reflect your personal needs.
+                    </p>
+                </div>
+
+                <!-- Track Progress -->
+                <div>
+                    <h3 class="text-3xl font-light text-[#2b4c7e] mb-4">Track Progress</h3>
+                    <p class="text-xl text-[#3a5f8f] leading-relaxed font-light">
+                        We're building a system that will help you track your progress and understand what strategies work. Real-time feedback helps you adjust and optimize your sleep routine.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+   
+    
+    <!-- Floating Bottom CTA -->
+    <!-- <div class="fixed bottom-4 left-1/2 transform -translate-x-1/2">
+        <a href="/survey" 
+           class="inline-block text-lg px-12 py-4 border-2 border-[#0f172a] text-white rounded-full 
+           bg-[#0f172a] hover:bg-[#3b82f6] hover:border-[#3b82f6] transition-all duration-300 
+           shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
+            Take the Sleep Quiz
+        </a>
+    </div> -->
+    
+    <!-- Footer -->
+    <footer class="py-10 text-center">
+        <p>&copy; 2025 Somn. All rights reserved.</p>
+    </footer>
+    
+    <!-- Contact Section -->
+    <section id="contact" class="py-32 px-6 bg-[#0f172a]">
+        <div class="max-w-xl mx-auto text-center">
+            <h2 class="text-4xl md:text-5xl font-light text-white mb-8">
+                Get in Touch
+            </h2>
+            <p class="text-xl text-gray-300 font-light mb-12">
+                Have questions? We're here to help.
+            </p>
+            
+            <form action="mailto:sleep.somn@gmail.com" method="post" enctype="text/plain">
+                <div class="space-y-6">
+                    <div>
+                        <input 
+                            type="text" 
+                            name="name" 
+                            placeholder="Your Name" 
+                            class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:border-white/40 text-white placeholder-gray-400"
+                            required
+                        >
+                    </div>
+                    <div>
+                        <input 
+                            type="email" 
+                            name="email" 
+                            placeholder="Your Email" 
+                            class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:border-white/40 text-white placeholder-gray-400"
+                            required
+                        >
+                    </div>
+                    <div>
+                        <textarea 
+                            name="message" 
+                            placeholder="Your Message" 
+                            rows="4" 
+                            class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:border-white/40 text-white placeholder-gray-400"
+                            required
+                        ></textarea>
+                    </div>
+                    <button 
+                        type="submit" 
+                        class="w-full px-8 py-4 bg-white/10 hover:bg-white/20 border border-white/20 rounded-lg text-white transition-all duration-300"
+                    >
+                        Send Message
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
 </body>
 </html>
