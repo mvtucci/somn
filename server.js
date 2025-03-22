@@ -137,8 +137,10 @@ app.use((err, req, res, next) => {
     res.status(500).send('Server error');
 });
 
-// Start server
-const port = process.env.PORT || 8000;  // Use platform's PORT or default to 8000
-app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
+// Update the port configuration
+const port = process.env.PORT || 8000;
+
+// Update the listen call to use the port variable
+app.listen(port, '0.0.0.0', () => {
+    console.log(`Server is running on port ${port}`);
 }); 

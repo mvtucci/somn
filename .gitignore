@@ -3,3 +3,5 @@ node_modules/
 archive/
 config.js
 .env
+.DS_Store
+assets2/.DS_Store
