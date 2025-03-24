@@ -250,7 +250,16 @@
                 Have questions? We're here to help.
             </p>
             
-            <form id="contact-form" onSubmit="handleSubmit(event)">
+            <!-- Success Message (hidden by default) -->
+            <div id="success-message" class="hidden">
+                <h3 class="text-2xl font-light text-[#93c5fd] mb-4">Message Sent!</h3>
+                <p class="text-xl text-gray-300 font-light mb-8">
+                    Thanks for reaching out. We'll get back to you soon.
+                </p>
+            </div>
+
+            <!-- Form -->
+            <form id="contact-form" class="transition-opacity duration-300">
                 <div class="space-y-6">
                     <div>
                         <input 
@@ -281,6 +290,7 @@
                     </div>
                     <button 
                         type="submit" 
+                        id="submit-button"
                         class="w-full px-8 py-4 bg-white/10 hover:bg-white/20 border border-white/20 rounded-lg text-white transition-all duration-300"
                     >
                         Send Message
@@ -289,5 +299,50 @@
             </form>
         </div>
     </section>
+
+    <!-- Add this script before closing body tag -->
+    <script>
+        const form = document.getElementById('contact-form');
+        const successMessage = document.getElementById('success-message');
+        const submitButton = document.getElementById('submit-button');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Show loading state
+            submitButton.innerHTML = `
+                <div class="inline-block animate-spin rounded-full h-4 w-4 border-t-2 border-b-2 border-blue-400"></div>
+            `;
+            submitButton.disabled = true;
+
+            try {
+                const response = await fetch('https://formspree.io/f/xanejdvw', {
+                    method: 'POST',
+                    body: new FormData(form),
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    // Hide form with fade
+                    form.style.opacity = '0';
+                    setTimeout(() => {
+                        form.style.display = 'none';
+                        // Show success message with fade
+                        successMessage.style.display = 'block';
+                        setTimeout(() => {
+                            successMessage.style.opacity = '1';
+                        }, 50);
+                    }, 300);
+                } else {
+                    throw new Error('Failed to send message');
+                }
+            } catch (error) {
+                submitButton.innerHTML = 'Error - Try Again';
+                submitButton.disabled = false;
+            }
+        });
+    </script>
 </body>
 </html>
