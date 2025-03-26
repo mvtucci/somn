@@ -52,7 +52,10 @@
             <!-- Loading State -->
             <div id="loading" class="loading-animation text-center py-20">
                 <div class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-400 mb-4"></div>
-                <p class="text-xl text-gray-300 font-light">Analyzing your sleep assessment...</p>
+                <p class="text-xl text-gray-300 font-light mb-2">Analyzing your sleep assessment...<br>this may take a few moments.</p>
+                <p id="retry-message" class="text-lg text-gray-400 font-light hidden">
+                    Still processing... Attempt <span id="retry-count">1</span> of 3
+                </p>
             </div>
 
             <!-- Error State -->
@@ -86,29 +89,61 @@
 
             loadingEl.style.display = 'block';
 
+            // Add retry logic
+            const maxRetries = 3;
+            const retryDelay = 2000; // 2 seconds
+
+            async function fetchWithRetry(submissionId, attempt = 1) {
+                try {
+                    console.log(`Attempt ${attempt} to fetch results...`);
+                    const response = await fetch(`/api/process-sleep?submissionId=${submissionId}`);
+                    console.log('Response status:', response.status);
+                    
+                    if (!response.ok) {
+                        if (attempt < maxRetries) {
+                            console.log(`Retrying in ${retryDelay/1000} seconds...`);
+                            await new Promise(resolve => setTimeout(resolve, retryDelay));
+                            return fetchWithRetry(submissionId, attempt + 1);
+                        }
+                        throw new Error('Failed to fetch results');
+                    }
+                    
+                    return await response.json();
+                } catch (error) {
+                    if (attempt < maxRetries) {
+                        console.log(`Retrying in ${retryDelay/1000} seconds...`);
+                        await new Promise(resolve => setTimeout(resolve, retryDelay));
+                        return fetchWithRetry(submissionId, attempt + 1);
+                    }
+                    throw error;
+                }
+            }
+
             try {
                 console.log('Starting assessment request...');
-                // Get Q69VL7 from ?Q69VL7
                 const submissionId = window.location.search.substring(1);
                 console.log('Submission ID:', submissionId);
                 
-                const response = await fetch(`/api/process-sleep?submissionId=${submissionId}`);
-                console.log('Response status:', response.status);
-                
-                if (!response.ok) throw new Error('Failed to fetch results');
-                
-                const data = await response.json();
+                const data = await fetchWithRetry(submissionId);
                 const guidance = data.response;
 
-                // Format the guidance text with proper spacing and styling
+                // Format the initial guidance text
                 const formattedGuidance = guidance
                     .split('\n')
                     .map(line => {
                         if (line.startsWith('###') || line.startsWith('##')) {
                             return `<h3 class="text-2xl font-light text-[#93c5fd] mt-8 mb-4">${line.replace(/###|##/g, '').trim()}</h3>`;
                         }
+                        // Handle bullet points with bold
+                        if (line.trim().startsWith('-')) {
+                            return `<p class="text-gray-300 font-light leading-relaxed mb-4 pl-4">${
+                                line.replace(/\*\*(.*?)\*\*/g, '<strong class="text-white">$1</strong>')
+                            }</p>`;
+                        }
                         if (line.trim() === '') return '<br>';
-                        return `<p class="text-gray-300 font-light leading-relaxed mb-4">${line}</p>`;
+                        return `<p class="text-gray-300 font-light leading-relaxed mb-4">${
+                            line.replace(/\*\*(.*?)\*\*/g, '<strong class="text-white">$1</strong>')
+                        }</p>`;
                     })
                     .join('');
 
@@ -191,7 +226,7 @@
 
                         const data = await response.json();
 
-                        // Format the response
+                        // Format the response for chat messages
                         const formattedResponse = data.response
                             .split('\n')
                             .map(line => {
@@ -199,7 +234,9 @@
                                     return `<h4 class="text-xl font-light text-[#93c5fd] mb-2">${line.replace(/###|##/g, '').trim()}</h4>`;
                                 }
                                 if (line.trim() === '') return '<br>';
-                                return `<p class="text-gray-300 font-light leading-relaxed mb-2">${line}</p>`;
+                                return `<p class="text-gray-300 font-light leading-relaxed mb-2">${
+                                    line.replace(/\*\*(.*?)\*\*/g, '<strong class="text-white">$1</strong>')
+                                }</p>`;
                             })
                             .join('');
 
